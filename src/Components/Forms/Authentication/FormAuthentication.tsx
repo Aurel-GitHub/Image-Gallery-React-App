@@ -4,36 +4,52 @@ import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { IUser } from 'Services/Utils/Interfaces/i-user';
 import { yupResolver } from '@hookform/resolvers/yup';
-import { authValidator } from 'Services/Utils/Validators/authenticationValidator';
+import {
+  signinValidator,
+  signupValidator,
+} from 'Services/Utils/Validators/authenticationValidator';
 import 'Assets/Styles/Global/Button.css';
 import axios, { AxiosError, AxiosResponse } from 'axios';
 import { v4 as uuidv4 } from 'uuid';
 
 export default function FormAuthentication(): JSX.Element {
-  const [errorMessage, setErrorMessage] = useState('');
+  const [errorMessage, setErrorMessage] = useState<string>('');
+  const [isCreateAccount, setIsCreateAccount] = useState<boolean>(false);
+
+  const env: string | undefined = process.env.REACT_APP_SERVER_URL;
+  const title: string = isCreateAccount ? 'Sign up' : 'Sign in';
+  const sentence: string = isCreateAccount ? 'Sign in ?' : 'Sign up ?';
+  const handleValidator = isCreateAccount ? signupValidator : signinValidator;
+
+  const naviguate = useNavigate();
+
+  const handleForm = (): void => {
+    setIsCreateAccount(isCreateAccount ? false : true);
+    reset();
+  };
 
   const {
+    reset,
     register,
     handleSubmit,
     formState: { errors },
   } = useForm<IUser>({
-    resolver: yupResolver(authValidator),
+    resolver: yupResolver(handleValidator),
   });
-
-  const naviguate = useNavigate();
 
   const onSubmit: SubmitHandler<IUser> = async (formValues: IUser): Promise<void> => {
     try {
-      formValues.id = uuidv4();
-      const response: AxiosResponse = await axios.post(
-        'http://localhost:5000/' + 'user',
-        formValues,
-      );
-      delete response.data.password;
-      localStorage.setItem('user_id', response.data.id);
-      localStorage.setItem('user_email', response.data.email);
+      let response: AxiosResponse;
+      if (isCreateAccount) {
+        formValues.id = uuidv4();
+        response = await axios.post(env + 'user', formValues);
+      } else {
+        response = await axios.post(env + 'user', formValues);
+      }
+      localStorage.setItem('token', response.data.id);
+      localStorage.setItem('firstname', response.data.email);
       naviguate('/');
-    } catch (error: any | AxiosError) {
+    } catch (error: AxiosError | any) {
       setErrorMessage('Try again later please');
       throw new Error('error', error);
     }
@@ -41,11 +57,21 @@ export default function FormAuthentication(): JSX.Element {
 
   return (
     <>
-      <h1 style={{ textAlign: 'center' }}>Sign in</h1>
+      <h1 style={{ textAlign: 'center' }}>{title}</h1>
       <form className={styles.formLogin} onSubmit={handleSubmit(onSubmit)}>
+        {isCreateAccount && (
+          <>
+            <input
+              placeholder='Firstname'
+              className={styles.formInputAuthentication}
+              {...register('firstname')}
+            />
+            <small className={styles.textDanger}>{errors.firstname?.message}</small>
+          </>
+        )}
+
         <input
-          placeholder='
-          Email'
+          placeholder='Email'
           className={styles.formInputAuthentication}
           {...register('email')}
         />
@@ -64,6 +90,9 @@ export default function FormAuthentication(): JSX.Element {
           <button type='submit' className='btnPrimary'>
             Send
           </button>
+          <small className={styles.handleForm} onClick={handleForm}>
+            {sentence}
+          </small>
         </div>
       </form>
     </>

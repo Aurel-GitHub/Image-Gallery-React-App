@@ -11,7 +11,6 @@
     {
       "artist": "Kamau",
       "category": "Utilities",
-
       "year": "2005",
       "photo": "https://picsum.photos/400/484",
       "id": 3
@@ -19,9 +18,7 @@
     {
       "artist": "Samedixs",
       "year": "2010",
-
       "category": "Artwork",
-
       "photo": "https://picsum.photos/400/396",
       "id": 4
     },
@@ -45,7 +42,6 @@
       "authorID": "81214d14-6722-4fe7-800a-e11c7b54be18",
       "photo": "https://picsum.photos/400/443",
       "category": "Utilities",
-
       "id": 7
     },
     {
@@ -65,9 +61,9 @@
     }
   ],
   "user": {
-    "email": "doe@gmail.com",
-    "password": "doe@gmail.com",
-    "firstname": "John Doe",
-    "id": "81214d14-6722-4fe7-800a-e11c7b54be18"
+    "firstname": "test@test.test",
+    "email": "test@test.test",
+    "password": "test@test.test",
+    "id": "e0257bac-09f8-4701-bc07-06e94bd2d3f6"
   }
 }
