@@ -1,0 +1,43 @@
+.formLogin {
+  display: flex;
+  flex-direction: column;
+  padding: 1rem;
+  margin: 2rem 1rem;
+  align-items: center;
+}
+
+.formInputAuthentication {
+  width: 80%;
+  margin-bottom: 1rem;
+  padding: 0.3rem;
+}
+
+.formBtnSection {
+  margin-top: 1rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+}
+
+.handleForm {
+  margin-top: 8px;
+  color: blue;
+  font-size: 13px;
+  font-weight: 400;
+  cursor: pointer;
+}
+
+.textDanger {
+  color: red;
+  font-size: 11px;
+  margin-bottom: 1rem;
+}
+@media (max-width: 1000px) {
+  .formInput {
+    width: 100%;
+  }
+  .handleForm {
+    margin-top: 1rem;
+  }
+}
