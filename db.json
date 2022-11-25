@@ -1,0 +1,74 @@
+{
+  "pictures": [
+    {
+      "artist": "Paulin Frustro",
+      "year": "2021",
+      "photo": "https://picsum.photos/400/352",
+      "authorID": "81214d14-6722-4fe7-800a-e11c7b54be18",
+      "category": "Artwork",
+
+      "id": 1
+    },
+    {
+      "artist": "Kamau",
+      "category": "Utilities",
+
+      "year": "2005",
+      "photo": "https://picsum.photos/400/484",
+      "id": 3
+    },
+    {
+      "artist": "Samedixs",
+      "year": "2010",
+
+      "category": "Artwork",
+
+      "photo": "https://picsum.photos/400/396",
+      "id": 4
+    },
+    {
+      "artist": "Misan Harriman",
+      "year": "1999",
+      "category": "Metavers",
+      "photo": "https://picsum.photos/400/338",
+      "id": 5
+    },
+    {
+      "artist": "Takeshi Nagano",
+      "year": "2017",
+      "category": "Metavers",
+      "photo": "https://picsum.photos/400/499",
+      "id": 6
+    },
+    {
+      "artist": "Neil Burnell",
+      "year": "2012",
+      "authorID": "81214d14-6722-4fe7-800a-e11c7b54be18",
+      "photo": "https://picsum.photos/400/443",
+      "category": "Utilities",
+
+      "id": 7
+    },
+    {
+      "artist": "Jidhun",
+      "year": "2009",
+      "category": "Artwork",
+      "authorID": "81214d14-6722-4fe7-800a-e11c7b54be18",
+      "photo": "https://picsum.photos/400/364",
+      "id": 8
+    },
+    {
+      "artist": "Martin Grange",
+      "year": "2021",
+      "category": "Utilities",
+      "photo": "https://picsum.photos/400/470",
+      "id": 9
+    }
+  ],
+  "user": {
+    "email": "doe@gmail.com",
+    "password": "doe@gmail.com",
+    "firstname": "John Doe",
+    "id": "81214d14-6722-4fe7-800a-e11c7b54be18"
+  }
+}

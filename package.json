@@ -21,6 +21,7 @@
     "eslint-plugin-prettier": "^4.2.1",
     "eslint-plugin-react-hooks": "^4.6.0",
     "framer-motion": "^7.6.12",
+    "json-server": "^0.17.1",
     "prettier": "^2.7.1",
     "react": "^18.2.0",
     "react-auth-kit": "^2.7.0",
@@ -40,7 +41,8 @@
     "eject": "react-scripts eject",
     "lint": "eslint src/**/*.{js,jsx,ts,tsx,json}",
     "lint:fix": "eslint --fix 'src/**/*.{js,jsx,ts,tsx,json}'",
-    "format": "prettier --write 'src/**/*.{js,jsx,ts,tsx,css,md,json}' --config ./.prettierrc"
+    "format": "prettier --write 'src/**/*.{js,jsx,ts,tsx,css,md,json}' --config ./.prettierrc",
+    "server": "json-server db.json -p 5000 -w -d 0"
   },
   "eslintConfig": {
     "extends": [
