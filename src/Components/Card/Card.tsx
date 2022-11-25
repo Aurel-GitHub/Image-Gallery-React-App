@@ -1,7 +1,8 @@
 import styles from './Card.module.css';
 import { IPictures } from 'Services/Utils/Interfaces';
+import { useNavigate } from 'react-router-dom';
 
-export default function Card({ photo, artist, year }: IPictures) {
+export default function Card({ photo, artist, year, id }: IPictures) {
   //   const dispatch = useDispatch();
 
   //   const handleEdit = () => {
@@ -11,7 +12,7 @@ export default function Card({ photo, artist, year }: IPictures) {
   //       dispatch(editPicture(['FORM VALUES', 'ID PICTURE']));
   //     });
   //   };
-
+  const navigation = useNavigate();
   return (
     <div className={styles.card}>
       <img src={photo} className={styles.photo} alt={'photo of' + artist} />
@@ -19,7 +20,14 @@ export default function Card({ photo, artist, year }: IPictures) {
         <div className={styles.title}>
           {artist} - {year}
         </div>
-        <div className={styles.btnDetails}>Détails</div>
+        <div
+          className={styles.btnDetails}
+          onClick={() => {
+            navigation('/pictures-details/' + id);
+          }}
+        >
+          Details
+        </div>
       </div>
     </div>
   );
