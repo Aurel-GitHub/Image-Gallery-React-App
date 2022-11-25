@@ -1,0 +1,29 @@
+.navHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1rem 2rem;
+  background-color: #1a202c;
+  flex-direction: row;
+}
+.logo {
+  color: white;
+  font-weight: 700;
+  text-transform: uppercase;
+  cursor: pointer;
+}
+.decorationNone {
+  text-decoration: none;
+}
+
+@media (max-width: 700px) {
+  .navHeader {
+    flex-direction: column;
+    padding: 1rem 4rem;
+    text-align: center;
+  }
+  .btnSection {
+    display: flex;
+    flex-direction: column;
+  }
+}
