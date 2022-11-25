@@ -1,9 +1,32 @@
 .btnPrimary {
+  background: none;
+  border: 1px white solid;
+  border-radius: 5px;
   padding: 0.5rem 1rem;
-  font-weight: bold;
+  font-weight: 600;
   cursor: pointer;
   font-size: 14px;
   margin: 0rem 0.5rem;
+  color: white;
+}
+.btnPrimary:hover {
+  transition: 0.5s;
+  background-color: white;
+  color: black !important;
+}
+
+.btnDetails {
+  cursor: pointer;
+  padding: 3px 10px;
+  background-color: none;
+  border: 1px black solid;
+  border-radius: 5px;
+  margin-left: 2px;
+}
+.btnDetails:hover {
+  transition: 0.5s;
+  background-color: black;
+  color: white;
 }
 @media (max-width: 700px) {
   .btnPrimary {

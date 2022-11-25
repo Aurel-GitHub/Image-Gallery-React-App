@@ -4,6 +4,7 @@ import axios, { AxiosError } from 'axios';
 import URL from 'Services/Utils/Constants/url';
 import { useDispatch } from 'react-redux';
 import { deletePicture } from 'Services/Redux/Features/picturesSlice';
+import 'Assets/Styles/Global/Button.css';
 
 export default function Card({ photo, artist, year, category, id, authorID }: IPictures) {
   const dispatch = useDispatch();
