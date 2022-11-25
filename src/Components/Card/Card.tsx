@@ -1,45 +1,23 @@
-import { useState } from 'react';
-import axios from 'axios';
 import styles from './Card.module.css';
-import ButtonsCardDelete from 'Components/Buttons/Card/Delete/ButtonsCardDelete';
-import { FiEdit } from 'react-icons/fi';
-import { useDispatch } from 'react-redux';
-import { editPicture } from 'Services/Redux/Features/picturesSlice';
 import { IPictures } from 'Services/Utils/Interfaces';
-import URL from 'Services/Utils/Constants/url';
 
-export default function Card({ photo, artist, id, year }: IPictures) {
-  const [edit, setEdit] = useState(false);
-  const dispatch = useDispatch();
+export default function Card({ photo, artist, year }: IPictures) {
+  //   const dispatch = useDispatch();
 
-  const handleEdit = () => {
-    setEdit(false);
+  //   const handleEdit = () => {
+  //     setEdit(false);
 
-    axios.put(URL + 'pictures' + id, ['TODO']).then(() => {
-      dispatch(editPicture(['FORM VALUES', 'ID PICTURE']));
-    });
-  };
+  //     axios.put(URL + 'pictures' + id, ['TODO']).then(() => {
+  //       dispatch(editPicture(['FORM VALUES', 'ID PICTURE']));
+  //     });
+  //   };
 
   return (
-    <div className={styles.picCard}>
-      <img src={photo} alt={'photo of' + artist} />
-      <div className={styles.info}>
-        <div className='title'>
-          {edit ? (
-            <div>
-              {/* <input defaultValue={pic.artist} ref={artistInput} autoFocus></input> */}
-              <button onClick={() => handleEdit()}>Valider</button>
-            </div>
-          ) : (
-            <h4>QQCH ICI</h4>
-          )}
-          <p>{year}</p>
-        </div>
-        <div className='btn-container'>
-          <div className='edit-icon' onClick={() => setEdit(!edit)}>
-            <FiEdit />
-          </div>
-          <ButtonsCardDelete id={id} />
+    <div className={styles.card}>
+      <img src={photo} className={styles.photo} alt={'photo of' + artist} />
+      <div className={styles.cardInfos}>
+        <div className={styles.title}>
+          {artist} - {year}
         </div>
       </div>
     </div>

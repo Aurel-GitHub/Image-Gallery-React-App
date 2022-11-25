@@ -1,16 +1,44 @@
-.picCard {
+.card {
   border-radius: 14px;
   overflow: hidden;
   box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
   margin: 14px 14px 0 0;
   height: 300px;
   transition: 0.2s;
+  cursor: pointer;
 }
-.picCard:hover {
+.card:hover {
   transform: scale(1.02);
   box-shadow: 0 4px 40px rgba(32, 129, 227, 0.35);
 }
-.infos {
+.cardInfos {
+  padding: 1rem;
   display: grid;
   grid-template-columns: 90% 10%;
+}
+
+.photo {
+  height: 80%;
+  width: 100%;
+  object-fit: cover;
+}
+
+.title {
+  text-align: left;
+}
+
+@media screen and (max-width: 1050px) {
+  .card {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+@media screen and (max-width: 900px) {
+  .card {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+@media screen and (max-width: 550px) {
+  .card {
+    grid-template-columns: repeat(1, 1fr);
+  }
 }
