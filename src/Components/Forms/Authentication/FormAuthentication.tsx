@@ -11,12 +11,12 @@ import {
 import 'Assets/Styles/Global/Button.css';
 import axios, { AxiosError, AxiosResponse } from 'axios';
 import { v4 as uuidv4 } from 'uuid';
+import URL from 'Services/Utils/Constants/url';
 
 export default function FormAuthentication(): JSX.Element {
   const [errorMessage, setErrorMessage] = useState<string>('');
   const [isCreateAccount, setIsCreateAccount] = useState<boolean>(false);
 
-  const url: string | undefined = process.env.REACT_APP_SERVER_URL;
   const handleValidator = isCreateAccount ? signupValidator : signinValidator;
   const formLabels: { title: string; sentence: string } = {
     title: isCreateAccount ? 'Sign up' : 'Sign in',
@@ -36,7 +36,7 @@ export default function FormAuthentication(): JSX.Element {
     passwordFormValue: string,
   ): Promise<boolean> => {
     try {
-      const response = await axios.get(url + 'users');
+      const response = await axios.get(URL + 'users');
       const usersList: IUser[] = response.data;
       const isEmailExist: boolean = usersList?.some((elt) => elt.email === emailFormValue);
       const isPasswordExist: boolean = usersList?.some((elt) => elt.password === passwordFormValue);
@@ -73,9 +73,9 @@ export default function FormAuthentication(): JSX.Element {
       let response: AxiosResponse;
       if (isCreateAccount) {
         formValues.id = uuidv4();
-        response = await axios.post(url + 'users', formValues);
+        response = await axios.post(URL + 'users', formValues);
       } else {
-        response = await axios.post(url + 'users', formValues);
+        response = await axios.post(URL + 'users', formValues);
       }
       localStorage.setItem('token', response.data.id);
       localStorage.setItem('firstname', response.data.email);
