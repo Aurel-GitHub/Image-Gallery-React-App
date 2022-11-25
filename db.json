@@ -60,10 +60,18 @@
       "id": 9
     }
   ],
-  "user": {
-    "firstname": "test@test.test",
-    "email": "test@test.test",
-    "password": "test@test.test",
-    "id": "e0257bac-09f8-4701-bc07-06e94bd2d3f6"
-  }
+  "users": [
+    {
+      "firstname": "Laura Williams",
+      "email": "williams@gmail.com",
+      "password": "williams@gmail.com",
+      "id": "c7bd7b5c-3a03-4222-99aa-4f65c27eb02e"
+    },
+    {
+      "firstname": "John Doe",
+      "email": "doe@gmail.com",
+      "password": "doe@gmail.com",
+      "id": "23a510b4-bd07-4d29-8796-afcfac4dd214"
+    }
+  ]
 }

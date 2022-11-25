@@ -28,6 +28,29 @@ export default function FormAuthentication(): JSX.Element {
     reset();
   };
 
+  const hasAccessAuthentication = async (
+    emailFormValue: string,
+    passwordFormValue: string,
+  ): Promise<boolean> => {
+    try {
+      const response = await axios.get(env + 'users');
+      const usersList: IUser[] = response.data;
+      const isEmailExist: boolean = usersList?.some((elt) => elt.email === emailFormValue);
+      const isPasswordExist: boolean = usersList?.some((elt) => elt.password === passwordFormValue);
+
+      if (isCreateAccount && !isEmailExist) {
+        return true;
+      } else if (!isCreateAccount && isEmailExist && isPasswordExist) {
+        return true;
+      } else {
+        setErrorMessage('Input error, please try again');
+        return false;
+      }
+    } catch (error: AxiosError | any) {
+      throw new Error();
+    }
+  };
+
   const {
     reset,
     register,
@@ -39,19 +62,24 @@ export default function FormAuthentication(): JSX.Element {
 
   const onSubmit: SubmitHandler<IUser> = async (formValues: IUser): Promise<void> => {
     try {
+      const isAccess: boolean = await hasAccessAuthentication(
+        formValues.email,
+        formValues.password,
+      );
       let response: AxiosResponse;
+      if (!isAccess) return;
       if (isCreateAccount) {
         formValues.id = uuidv4();
-        response = await axios.post(env + 'user', formValues);
+        response = await axios.post(env + 'users', formValues);
       } else {
-        response = await axios.post(env + 'user', formValues);
+        response = await axios.post(env + 'users', formValues);
       }
       localStorage.setItem('token', response.data.id);
       localStorage.setItem('firstname', response.data.email);
       naviguate('/');
     } catch (error: AxiosError | any) {
       setErrorMessage('Try again later please');
-      throw new Error('error', error);
+      throw new Error(error);
     }
   };
 
