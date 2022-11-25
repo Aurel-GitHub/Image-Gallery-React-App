@@ -33,7 +33,7 @@ export default function Home(): JSX.Element {
   return (
     <Container>
       <>
-        {!isLoading && picturesData !== null ? (
+        {!isLoading ? (
           picturesData?.map((picture) => {
             return <Card {...picture} key={picture.id} />;
           })

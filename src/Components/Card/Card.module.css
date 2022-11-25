@@ -1,0 +1,16 @@
+.picCard {
+  border-radius: 14px;
+  overflow: hidden;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
+  margin: 14px 14px 0 0;
+  height: 300px;
+  transition: 0.2s;
+}
+.picCard:hover {
+  transform: scale(1.02);
+  box-shadow: 0 4px 40px rgba(32, 129, 227, 0.35);
+}
+.infos {
+  display: grid;
+  grid-template-columns: 90% 10%;
+}
