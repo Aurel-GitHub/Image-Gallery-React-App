@@ -6,13 +6,11 @@
       "photo": "https://picsum.photos/400/352",
       "authorID": "81214d14-6722-4fe7-800a-e11c7b54be18",
       "category": "Artwork",
-
       "id": 1
     },
     {
       "artist": "Kamau",
       "category": "Utilities",
-
       "year": "2005",
       "photo": "https://picsum.photos/400/484",
       "id": 3
@@ -20,9 +18,7 @@
     {
       "artist": "Samedixs",
       "year": "2010",
-
       "category": "Artwork",
-
       "photo": "https://picsum.photos/400/396",
       "id": 4
     },
@@ -46,7 +42,6 @@
       "authorID": "81214d14-6722-4fe7-800a-e11c7b54be18",
       "photo": "https://picsum.photos/400/443",
       "category": "Utilities",
-
       "id": 7
     },
     {
@@ -65,10 +60,18 @@
       "id": 9
     }
   ],
-  "user": {
-    "email": "doe@gmail.com",
-    "password": "doe@gmail.com",
-    "firstname": "John Doe",
-    "id": "81214d14-6722-4fe7-800a-e11c7b54be18"
-  }
+  "users": [
+    {
+      "firstname": "Laura Williams",
+      "email": "williams@gmail.com",
+      "password": "williams@gmail.com",
+      "id": "c7bd7b5c-3a03-4222-99aa-4f65c27eb02e"
+    },
+    {
+      "firstname": "John Doe",
+      "email": "doe@gmail.com",
+      "password": "doe@gmail.com",
+      "id": "23a510b4-bd07-4d29-8796-afcfac4dd214"
+    }
+  ]
 }

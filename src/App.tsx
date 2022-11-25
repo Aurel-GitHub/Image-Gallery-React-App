@@ -1,10 +1,7 @@
+import Navigation from 'Services/Navigation/Navigation';
 
 function App() {
-  return (
-      <div className='app'>
-        <h1>qsdqsd</h1>
-      </div>
-  );
+  return <Navigation />;
 }
 
 export default App;
