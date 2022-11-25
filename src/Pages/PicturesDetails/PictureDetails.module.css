@@ -1,9 +1,0 @@
-.pictureDetailSection {
-  display: flex;
-  flex-direction: col;
-  background-color: red;
-}
-.pictureImageSection {
-  display: flex;
-  flex-direction: row;
-}
