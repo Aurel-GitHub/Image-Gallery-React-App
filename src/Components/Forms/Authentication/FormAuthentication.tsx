@@ -25,6 +25,7 @@ export default function FormAuthentication(): JSX.Element {
 
   const handleForm = (): void => {
     setIsCreateAccount(isCreateAccount ? false : true);
+    setErrorMessage('');
     reset();
   };
 
