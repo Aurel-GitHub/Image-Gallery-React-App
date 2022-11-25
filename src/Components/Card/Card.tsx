@@ -5,7 +5,7 @@ import URL from 'Services/Utils/Constants/url';
 import { useDispatch } from 'react-redux';
 import { deletePicture } from 'Services/Redux/Features/picturesSlice';
 
-export default function Card({ photo, artist, year, category, id }: IPictures) {
+export default function Card({ photo, artist, year, category, id, authorID }: IPictures) {
   const dispatch = useDispatch();
 
   //   const handleEdit = () => {
@@ -15,6 +15,10 @@ export default function Card({ photo, artist, year, category, id }: IPictures) {
   //       dispatch(editPicture(['FORM VALUES', 'ID PICTURE']));
   //     });
   //   };
+
+  const isCurrentUserAccess = () => {
+    if (localStorage.getItem('token')) return authorID === localStorage.getItem('token');
+  };
 
   const handleDelete = (id: string) => {
     try {
@@ -31,10 +35,14 @@ export default function Card({ photo, artist, year, category, id }: IPictures) {
         <div className={styles.description}>
           {artist} - {year} - {category}
         </div>
-        <div className={styles.btnDetails}>Edit</div>
-        <div className={styles.btnDetails} onClick={() => handleDelete(id)}>
-          Delete
-        </div>
+        {isCurrentUserAccess() && (
+          <>
+            <div className={styles.btnDetails}>Edit</div>
+            <div className={styles.btnDetails} onClick={() => handleDelete(id)}>
+              Delete
+            </div>
+          </>
+        )}
       </div>
     </div>
   );
