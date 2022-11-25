@@ -19,6 +19,7 @@ export default function Card({ photo, artist, year }: IPictures) {
         <div className={styles.title}>
           {artist} - {year}
         </div>
+        <div className={styles.btnDetails}>Détails</div>
       </div>
     </div>
   );
