@@ -16,10 +16,12 @@ export default function FormAuthentication(): JSX.Element {
   const [errorMessage, setErrorMessage] = useState<string>('');
   const [isCreateAccount, setIsCreateAccount] = useState<boolean>(false);
 
-  const env: string | undefined = process.env.REACT_APP_SERVER_URL;
-  const title: string = isCreateAccount ? 'Sign up' : 'Sign in';
-  const sentence: string = isCreateAccount ? 'Sign in ?' : 'Sign up ?';
+  const url: string | undefined = process.env.REACT_APP_SERVER_URL;
   const handleValidator = isCreateAccount ? signupValidator : signinValidator;
+  const formLabels: { title: string; sentence: string } = {
+    title: isCreateAccount ? 'Sign up' : 'Sign in',
+    sentence: isCreateAccount ? 'Sign in ?' : 'Sign up ?',
+  };
 
   const naviguate = useNavigate();
 
@@ -34,7 +36,7 @@ export default function FormAuthentication(): JSX.Element {
     passwordFormValue: string,
   ): Promise<boolean> => {
     try {
-      const response = await axios.get(env + 'users');
+      const response = await axios.get(url + 'users');
       const usersList: IUser[] = response.data;
       const isEmailExist: boolean = usersList?.some((elt) => elt.email === emailFormValue);
       const isPasswordExist: boolean = usersList?.some((elt) => elt.password === passwordFormValue);
@@ -63,17 +65,17 @@ export default function FormAuthentication(): JSX.Element {
 
   const onSubmit: SubmitHandler<IUser> = async (formValues: IUser): Promise<void> => {
     try {
-      const isAccess: boolean = await hasAccessAuthentication(
+      const loginAuthorization: boolean = await hasAccessAuthentication(
         formValues.email,
         formValues.password,
       );
+      if (!loginAuthorization) return;
       let response: AxiosResponse;
-      if (!isAccess) return;
       if (isCreateAccount) {
         formValues.id = uuidv4();
-        response = await axios.post(env + 'users', formValues);
+        response = await axios.post(url + 'users', formValues);
       } else {
-        response = await axios.post(env + 'users', formValues);
+        response = await axios.post(url + 'users', formValues);
       }
       localStorage.setItem('token', response.data.id);
       localStorage.setItem('firstname', response.data.email);
@@ -86,7 +88,7 @@ export default function FormAuthentication(): JSX.Element {
 
   return (
     <>
-      <h1 style={{ textAlign: 'center' }}>{title}</h1>
+      <h1 style={{ textAlign: 'center' }}>{formLabels.title}</h1>
       <form className={styles.formLogin} onSubmit={handleSubmit(onSubmit)}>
         {isCreateAccount && (
           <>
@@ -120,7 +122,7 @@ export default function FormAuthentication(): JSX.Element {
             Send
           </button>
           <small className={styles.handleForm} onClick={handleForm}>
-            {sentence}
+            {formLabels.sentence}
           </small>
         </div>
       </form>
