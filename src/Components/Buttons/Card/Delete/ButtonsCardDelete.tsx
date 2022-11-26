@@ -3,9 +3,9 @@ import { AiOutlineDelete } from 'react-icons/ai';
 import { useDispatch } from 'react-redux';
 import { deletePicture } from 'Services/Redux/Features/picturesSlice';
 import URL from 'Services/Utils/Constants/url';
-import ButtonCardDeleteProps from 'Services/Utils/Types/buttonsCardDeleteProps';
+import { ButtonDelete } from 'Services/Utils/Types/ButtonDelete';
 
-export default function ButtonsCardDelete({ id }: ButtonCardDeleteProps): JSX.Element {
+export default function ButtonsCardDelete({ id }: ButtonDelete): JSX.Element {
   const dispatch = useDispatch();
 
   const handleDelete = async (): Promise<void> => {

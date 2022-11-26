@@ -5,6 +5,7 @@ import URL from 'Services/Utils/Constants/url';
 import { useDispatch } from 'react-redux';
 import { deletePicture } from 'Services/Redux/Features/picturesSlice';
 import 'Assets/Styles/Global/Button.css';
+import { isUserConnect } from 'Services/Utils/Constants';
 
 export default function Card({ photo, artist, year, category, id, authorID }: IPictures) {
   const dispatch = useDispatch();
@@ -18,7 +19,7 @@ export default function Card({ photo, artist, year, category, id, authorID }: IP
   //   };
 
   const isCurrentUserAccess = () => {
-    if (localStorage.getItem('token')) return authorID === localStorage.getItem('token');
+    if (isUserConnect) return authorID === localStorage.getItem('token');
   };
 
   const handleDelete = (id: string) => {

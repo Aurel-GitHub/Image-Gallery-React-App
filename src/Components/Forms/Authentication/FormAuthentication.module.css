@@ -6,12 +6,6 @@
   align-items: center;
 }
 
-.formInputAuthentication {
-  width: 80%;
-  margin-bottom: 1rem;
-  padding: 0.3rem;
-}
-
 .formBtnSection {
   margin-top: 1rem;
   display: flex;
@@ -27,16 +21,7 @@
   font-weight: 400;
   cursor: pointer;
 }
-
-.textDanger {
-  color: red;
-  font-size: 11px;
-  margin-bottom: 1rem;
-}
 @media (max-width: 1000px) {
-  .formInput {
-    width: 100%;
-  }
   .handleForm {
     margin-top: 1rem;
   }

@@ -3,4 +3,4 @@ export * from './i-user';
 export * from './i-pictures';
 export * from './i-pictures-state';
 export * from './i-modal';
-export * from './i-user-login-state';
+export * from './i-form-pictures';

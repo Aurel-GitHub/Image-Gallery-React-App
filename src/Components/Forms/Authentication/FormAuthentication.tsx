@@ -12,6 +12,8 @@ import 'Assets/Styles/Global/Button.css';
 import axios, { AxiosError, AxiosResponse } from 'axios';
 import { v4 as uuidv4 } from 'uuid';
 import URL from 'Services/Utils/Constants/url';
+import ErrorMessage from 'Components/ErrorMessage/ErrorMessage';
+import 'Assets/Styles/Global/Inputs.css';
 
 export default function FormAuthentication(): JSX.Element {
   const [errorMessage, setErrorMessage] = useState<string>('');
@@ -78,11 +80,11 @@ export default function FormAuthentication(): JSX.Element {
       let response: AxiosResponse;
       if (isCreateAccount) {
         formValues.id = uuidv4();
+        formValues.email.trim();
         response = await axios.post(URL + 'users', formValues);
         localStorage.setItem('token', response.data.id);
         localStorage.setItem('firstname', response.data.email);
       }
-
       naviguate('/');
     } catch (error: AxiosError | any) {
       setErrorMessage('Try again later please');
@@ -96,31 +98,24 @@ export default function FormAuthentication(): JSX.Element {
       <form className={styles.formLogin} onSubmit={handleSubmit(onSubmit)}>
         {isCreateAccount && (
           <>
-            <input
-              placeholder='Firstname'
-              className={styles.formInputAuthentication}
-              {...register('firstname')}
-            />
-            <small className={styles.textDanger}>{errors.firstname?.message}</small>
+            <input placeholder='Firstname' className='inputForm' {...register('firstname')} />
+            <ErrorMessage message={errors.firstname?.message} />
           </>
         )}
 
-        <input
-          placeholder='Email'
-          className={styles.formInputAuthentication}
-          {...register('email')}
-        />
-        <small className={styles.textDanger}>{errors.email?.message}</small>
+        <input placeholder='Email' className='inputForm' {...register('email')} />
+        <ErrorMessage message={errors.email?.message} />
 
         <input
           placeholder='Password'
           type='password'
-          className={styles.formInputAuthentication}
+          className='inputForm'
           {...register('password')}
         />
-        <small className={styles.textDanger}>{errors.password?.message}</small>
+        <ErrorMessage message={errors.password?.message} />
 
         {errorMessage && <small className={styles.textDanger}>{errorMessage}</small>}
+
         <div className={styles.formBtnSection}>
           <button type='submit' className='btnSecondary'>
             Send

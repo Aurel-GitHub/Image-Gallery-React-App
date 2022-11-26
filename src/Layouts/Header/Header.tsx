@@ -16,7 +16,9 @@ export default function Header(): JSX.Element {
           <h1 className={styles.logo}>NFT Gallery</h1>
         </Link>
         <div className={styles.btnSection}>
-          <button className='btnPrimary'>Add images</button>
+          <button className='btnPrimary' onClick={() => navigate('/add-picture')}>
+            Add images
+          </button>
           <button className='btnPrimary' onClick={logout}>
             Logout
           </button>

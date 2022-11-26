@@ -3,8 +3,7 @@ import { Navigate } from 'react-router-dom';
 import { ChildrenProps } from './Interfaces/i-children-props';
 
 export default function ProtectedRoute({ children }: ChildrenProps): JSX.Element {
-  const userConnected = localStorage.getItem('token');
-  if (!userConnected) {
+  if (!localStorage.getItem('token')) {
     return <Navigate to='/login' />;
   } else {
     return (
