@@ -42,7 +42,7 @@ export default function Card({ photo, artist, year, category, id, authorID }: IP
             {/* <div className={styles.btnDetails} onClick={() => alert('Edition Coming soon')}>
               Edit
             </div> */}
-            <div className={styles.btnDetails} onClick={() => handleDelete(id)}>
+            <div className='btnDetails' onClick={() => handleDelete(id)}>
               Delete
             </div>
           </>
