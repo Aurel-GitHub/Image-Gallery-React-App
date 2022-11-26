@@ -54,51 +54,52 @@ export default function FormPictures({ isEdit, picture }: IFormPictures): JSX.El
   return (
     <>
       <>
-        <h1 style={{ textAlign: 'center' }}>{formLabels.title}</h1>
         <form className={styles.formPicture} onSubmit={handleSubmit(onSubmit)}>
-          <label>Artist</label>
-          <input
-            placeholder='Artist'
-            type='text'
-            className='inputForm'
-            defaultValue={isEdit ? picture?.artist : ''}
-            {...register('artist')}
-          />
-          <ErrorMessage message={errors.artist?.message} />
+          <div className={styles.inputSection}>
+            <h1>{formLabels.title}</h1>
+            <label>Artist</label>
+            <input
+              placeholder='Artist'
+              type='text'
+              className='inputForm'
+              defaultValue={isEdit ? picture?.artist : ''}
+              {...register('artist')}
+            />
+            <ErrorMessage message={errors.artist?.message} />
 
-          <label>Year</label>
-          <input
-            placeholder='Year'
-            type='number'
-            defaultValue={isEdit ? picture?.year : 0}
-            className='inputForm'
-            {...register('year')}
-          />
-          <ErrorMessage message={errors.year?.message} />
+            <label>Year</label>
+            <input
+              placeholder='Year'
+              type='number'
+              defaultValue={isEdit ? picture?.year : 0}
+              className='inputForm'
+              {...register('year')}
+            />
+            <ErrorMessage message={errors.year?.message} />
 
-          <label>Picture</label>
-          <input
-            placeholder='Photo'
-            type='text'
-            defaultValue={
-              isEdit ? picture?.photo : 'https://picsum.photos/400/' + getRandomPictures
-            }
-            className='inputForm'
-            {...register('photo')}
-          />
-          <ErrorMessage message={errors.photo?.message} />
+            <label>Picture</label>
+            <input
+              placeholder='Photo'
+              type='text'
+              defaultValue={
+                isEdit ? picture?.photo : 'https://picsum.photos/400/' + getRandomPictures
+              }
+              className='inputForm'
+              {...register('photo')}
+            />
+            <ErrorMessage message={errors.photo?.message} />
+            <label>Catégory</label>
+            <select id='categories-select' className='selectOptions' {...register('category')}>
+              <option value='Artwork'>Artwork</option>
+              <option value='Utilities'>Utilities</option>
+              <option value='Metavers'>Metavers</option>
+            </select>
 
-          <label>Catégory</label>
-          <select id='categories-select' {...register('category')}>
-            <option value='Artwork'>Artwork</option>
-            <option value='Utilities'>Utilities</option>
-            <option value='Metavers'>Metavers</option>
-          </select>
-
-          {errorMessage && <small className={styles.textDanger}>{errorMessage}</small>}
-          <button type='submit' className='btnSecondary'>
-            Send
-          </button>
+            {errorMessage && <small className={styles.textDanger}>{errorMessage}</small>}
+            <button type='submit' className='btnSecondary'>
+              Send
+            </button>
+          </div>
         </form>
       </>
     </>

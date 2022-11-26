@@ -1,7 +1,11 @@
 .formPicture {
+  padding: 1rem 1rem 1rem 6rem;
+  align-items: flex-start;
+  margin: 1rem;
+}
+.inputSection {
   display: flex;
   flex-direction: column;
-  background-color: red;
-  padding: 1rem;
-  align-items: flex-start;
+  align-self: center;
+  width: 80%;
 }

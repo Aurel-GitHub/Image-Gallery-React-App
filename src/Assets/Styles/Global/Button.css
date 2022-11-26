@@ -24,6 +24,7 @@
   cursor: pointer;
   font-size: 14px;
   color: white;
+  max-width: 7rem;
 }
 .btnSecondary:hover {
   transition: 0.5s;
