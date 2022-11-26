@@ -39,9 +39,9 @@ export default function Card({ photo, artist, year, category, id, authorID }: IP
         </div>
         {isCurrentUserAccess() && (
           <>
-            <div className={styles.btnDetails} onClick={() => alert('Edition Coming soon')}>
+            {/* <div className={styles.btnDetails} onClick={() => alert('Edition Coming soon')}>
               Edit
-            </div>
+            </div> */}
             <div className={styles.btnDetails} onClick={() => handleDelete(id)}>
               Delete
             </div>
