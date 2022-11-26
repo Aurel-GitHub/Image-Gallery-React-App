@@ -16,7 +16,6 @@ import URL from 'Services/Utils/Constants/url';
 export default function FormAuthentication(): JSX.Element {
   const [errorMessage, setErrorMessage] = useState<string>('');
   const [isCreateAccount, setIsCreateAccount] = useState<boolean>(false);
-
   const handleValidator = isCreateAccount ? signupValidator : signinValidator;
   const formLabels: { title: string; sentence: string } = {
     title: isCreateAccount ? 'Sign up' : 'Sign in',
@@ -38,12 +37,18 @@ export default function FormAuthentication(): JSX.Element {
     try {
       const response = await axios.get(URL + 'users');
       const usersList: IUser[] = response.data;
+
       const isEmailExist: boolean = usersList?.some((elt) => elt.email === emailFormValue);
       const isPasswordExist: boolean = usersList?.some((elt) => elt.password === passwordFormValue);
 
       if (isCreateAccount && !isEmailExist) {
         return true;
       } else if (!isCreateAccount && isEmailExist && isPasswordExist) {
+        if (!usersList) return false;
+        const user: IUser | undefined = usersList.find((elt) => elt.email === emailFormValue);
+        if (!user) return false;
+        localStorage.setItem('token', user.id || '');
+        localStorage.setItem('firstname', user.firstname || '');
         return true;
       } else {
         setErrorMessage('Input error, please try again');
@@ -74,11 +79,10 @@ export default function FormAuthentication(): JSX.Element {
       if (isCreateAccount) {
         formValues.id = uuidv4();
         response = await axios.post(URL + 'users', formValues);
-      } else {
-        response = await axios.post(URL + 'users', formValues);
+        localStorage.setItem('token', response.data.id);
+        localStorage.setItem('firstname', response.data.email);
       }
-      localStorage.setItem('token', response.data.id);
-      localStorage.setItem('firstname', response.data.email);
+
       naviguate('/');
     } catch (error: AxiosError | any) {
       setErrorMessage('Try again later please');
