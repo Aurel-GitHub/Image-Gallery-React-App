@@ -6,6 +6,7 @@ import { useDispatch } from 'react-redux';
 import { deletePicture } from 'Services/Redux/Features/picturesSlice';
 import 'Assets/Styles/Global/Button.css';
 import { isUserConnect } from 'Services/Utils/Constants';
+import { useNavigate } from 'react-router-dom';
 
 export default function Card({ photo, artist, year, category, id, authorID }: IPictures) {
   const dispatch = useDispatch();
@@ -39,7 +40,9 @@ export default function Card({ photo, artist, year, category, id, authorID }: IP
         </div>
         {isCurrentUserAccess() && (
           <>
-            <div className={styles.btnDetails}>Edit</div>
+            <div className={styles.btnDetails} onClick={() => alert('Edition Coming soon')}>
+              Edit
+            </div>
             <div className={styles.btnDetails} onClick={() => handleDelete(id)}>
               Delete
             </div>
