@@ -15,6 +15,24 @@
   color: black !important;
 }
 
+.btnSecondary {
+  background: black;
+  border: 1px white solid;
+  border-radius: 5px;
+  padding: 0.5rem 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  font-size: 14px;
+  margin: 0rem 0.5rem;
+  color: white;
+}
+.btnSecondary:hover {
+  transition: 0.5s;
+  background-color: white;
+  color: black !important;
+  border: 1px black solid;
+}
+
 .btnDetails {
   cursor: pointer;
   padding: 3px 10px;
