@@ -40,7 +40,13 @@ export default function FormPictures({ isEdit, picture }: IFormPictures): JSX.El
     try {
       formValues.id = uuidv4();
       if (isUserConnect) formValues.authorID = isUserConnect;
-      const response: AxiosResponse = await axios.post(URL + 'pictures', formValues);
+      let response: AxiosResponse;
+      if (!isEdit) {
+        response = await axios.post(URL + 'pictures', formValues);
+      } else {
+        const id: string = location.pathname.slice(16);
+        response = await axios.put(URL + 'pictures' + id, formValues);
+      }
       dispatch(addPicture(response.data));
       naviguate('/');
     } catch (error: AxiosError | any) {
@@ -53,55 +59,55 @@ export default function FormPictures({ isEdit, picture }: IFormPictures): JSX.El
 
   return (
     <>
-      <>
-        <form className={styles.formPicture} onSubmit={handleSubmit(onSubmit)}>
-          <div className={styles.inputSection}>
-            <h1>{formLabels.title}</h1>
-            <label>Artist</label>
-            <input
-              placeholder='Artist'
-              type='text'
-              className='inputForm'
-              defaultValue={isEdit ? picture?.artist : ''}
-              {...register('artist')}
-            />
-            <ErrorMessage message={errors.artist?.message} />
+      <form className={styles.formPicture} onSubmit={handleSubmit(onSubmit)}>
+        <div className={styles.inputSection}>
+          <h1>
+            {formLabels.title} {isEdit}
+          </h1>
+          <label>Artist</label>
+          <input
+            placeholder='Artist'
+            type='text'
+            className='inputForm'
+            defaultValue={isEdit ? picture?.artist : ''}
+            {...register('artist')}
+          />
+          <ErrorMessage message={errors.artist?.message} />
 
-            <label>Year</label>
-            <input
-              placeholder='Year'
-              type='number'
-              defaultValue={isEdit ? picture?.year : 0}
-              className='inputForm'
-              {...register('year')}
-            />
-            <ErrorMessage message={errors.year?.message} />
+          <label>Year</label>
+          <input
+            placeholder='Year'
+            type='number'
+            defaultValue={isEdit ? picture?.year : 0}
+            className='inputForm'
+            {...register('year')}
+          />
+          <ErrorMessage message={errors.year?.message} />
 
-            <label>Picture</label>
-            <input
-              placeholder='Photo'
-              type='text'
-              defaultValue={
-                isEdit ? picture?.photo : 'https://picsum.photos/400/' + getRandomPictures
-              }
-              className='inputForm'
-              {...register('photo')}
-            />
-            <ErrorMessage message={errors.photo?.message} />
-            <label>Catégory</label>
-            <select id='categories-select' className='selectOptions' {...register('category')}>
-              <option value='Artwork'>Artwork</option>
-              <option value='Utilities'>Utilities</option>
-              <option value='Metavers'>Metavers</option>
-            </select>
+          <label>Picture</label>
+          <input
+            placeholder='Photo'
+            type='text'
+            defaultValue={
+              isEdit ? picture?.photo : 'https://picsum.photos/400/' + getRandomPictures
+            }
+            className='inputForm'
+            {...register('photo')}
+          />
+          <ErrorMessage message={errors.photo?.message} />
+          <label>Catégory</label>
+          <select id='categories-select' className='selectOptions' {...register('category')}>
+            <option value='Artwork'>Artwork</option>
+            <option value='Utilities'>Utilities</option>
+            <option value='Metavers'>Metavers</option>
+          </select>
 
-            {errorMessage && <small className={styles.textDanger}>{errorMessage}</small>}
-            <button type='submit' className='btnSecondary'>
-              Send
-            </button>
-          </div>
-        </form>
-      </>
+          {errorMessage && <small className={styles.textDanger}>{errorMessage}</small>}
+          <button type='submit' className='btnSecondary'>
+            {formLabels.label}
+          </button>
+        </div>
+      </form>
     </>
   );
 }

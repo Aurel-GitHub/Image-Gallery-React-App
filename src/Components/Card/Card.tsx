@@ -1,14 +1,13 @@
 import styles from './Card.module.css';
 import { IPictures } from 'Services/Utils/Interfaces';
-import axios, { AxiosError } from 'axios';
-import URL from 'Services/Utils/Constants/url';
-import { useDispatch } from 'react-redux';
-import { deletePicture } from 'Services/Redux/Features/picturesSlice';
 import 'Assets/Styles/Global/Button.css';
 import { isUserConnect } from 'Services/Utils/Constants';
+import { useNavigate } from 'react-router-dom';
 
 export default function Card({ photo, artist, year, category, id, authorID }: IPictures) {
-  const dispatch = useDispatch();
+  // const dispatch = useDispatch();
+
+  const navigate = useNavigate();
 
   //   const handleEdit = () => {
   //     setEdit(false);
@@ -22,14 +21,14 @@ export default function Card({ photo, artist, year, category, id, authorID }: IP
     if (isUserConnect) return authorID === localStorage.getItem('token');
   };
 
-  const handleDelete = (id: string) => {
-    try {
-      axios.delete(URL + 'pictures/' + id);
-      dispatch(deletePicture(id));
-    } catch (error: AxiosError | any) {
-      throw new error(error);
-    }
-  };
+  // const handleDelete = (id: string) => {
+  //   try {
+  //     axios.delete(URL + 'pictures/' + id);
+  //     dispatch(deletePicture(id));
+  //   } catch (error: AxiosError | any) {
+  //     throw new error(error);
+  //   }
+  // };
   return (
     <div className={styles.card}>
       <img src={photo} className={styles.photo} alt={'photo of' + artist} />
@@ -39,12 +38,12 @@ export default function Card({ photo, artist, year, category, id, authorID }: IP
         </div>
         {isCurrentUserAccess() && (
           <>
-            {/* <div className={styles.btnDetails} onClick={() => alert('Edition Coming soon')}>
+            <div className='btnDetails' onClick={() => navigate('/picture-detail/' + id)}>
               Edit
-            </div> */}
-            <div className='btnDetails' onClick={() => handleDelete(id)}>
-              Delete
             </div>
+            {/* <div className='btnDetails' onClick={() => handleDelete(id)}>
+              Delete
+            </div> */}
           </>
         )}
       </div>
