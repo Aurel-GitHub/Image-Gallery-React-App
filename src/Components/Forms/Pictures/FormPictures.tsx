@@ -12,6 +12,7 @@ import { useDispatch } from 'react-redux';
 import { addPicture, deletePicture, editPicture } from 'Services/Redux/Features/picturesSlice';
 import ErrorMessage from 'Components/ErrorMessage/ErrorMessage';
 import 'Assets/Styles/Global/Inputs.css';
+import { CATEGORIES } from 'Services/Utils/Enums/categories';
 
 export default function FormPictures({ isEdit, picture }: IFormPictures): JSX.Element {
   const [errorMessage, setErrorMessage] = useState<string>('');
@@ -95,9 +96,9 @@ export default function FormPictures({ isEdit, picture }: IFormPictures): JSX.El
 
           <label>Catégory</label>
           <select id='categories-select' className='selectOptions' {...register('category')}>
-            <option value='Artwork'>Artwork</option>
-            <option value='Utilities'>Utilities</option>
-            <option value='Metavers'>Metavers</option>
+            <option value={CATEGORIES.ARTWORK}>{CATEGORIES.ARTWORK}</option>
+            <option value={CATEGORIES.UTILITIES}>{CATEGORIES.UTILITIES}</option>
+            <option value={CATEGORIES.METAVERS}>{CATEGORIES.METAVERS}</option>
           </select>
 
           {errorMessage && <small className={styles.textDanger}>{errorMessage}</small>}
