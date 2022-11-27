@@ -1,0 +1,14 @@
+.selectOptionsFilter {
+  width: 30%;
+  padding: 0.5rem 1rem;
+  background-color: white;
+  border: 1px black solid;
+  border-radius: 5px;
+}
+
+@media (max-width: 700px) {
+  .selectOptionsFilter {
+    max-width: 7rem;
+    margin-bottom: 0.5rem;
+  }
+}

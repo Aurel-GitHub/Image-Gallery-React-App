@@ -12,7 +12,7 @@ import { useDispatch } from 'react-redux';
 import { addPicture, deletePicture, editPicture } from 'Services/Redux/Features/picturesSlice';
 import ErrorMessage from 'Components/ErrorMessage/ErrorMessage';
 import 'Assets/Styles/Global/Inputs.css';
-import { CATEGORIES } from 'Services/Utils/Enums/categories';
+import { CATEGORIES } from 'Services/Utils/Enums';
 
 export default function FormPictures({ isEdit, picture }: IFormPictures): JSX.Element {
   const [errorMessage, setErrorMessage] = useState<string>('');
