@@ -58,7 +58,7 @@
   color: white;
   max-width: 7rem;
 }
-.btnbtnAlert:hover {
+.btnAlert:hover {
   transition: 0.5s;
   background-color: white;
   color: red !important;
