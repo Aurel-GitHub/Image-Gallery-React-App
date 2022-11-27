@@ -2,12 +2,17 @@ import { Link, useNavigate } from 'react-router-dom';
 import styles from './Header.module.css';
 import 'Assets/Styles/Global/Button.css';
 import FilterCategories from 'Components/Filters/Categories/FilterCategories';
+import { useDispatch } from 'react-redux';
+import { setCategory } from 'Services/Redux/Features/categorySlice';
 
 export default function Header(): JSX.Element {
   const navigate = useNavigate();
 
+  const dispatch = useDispatch();
+
   const logout = async () => {
     localStorage.clear();
+    dispatch(setCategory(''));
     navigate('/login');
   };
 
