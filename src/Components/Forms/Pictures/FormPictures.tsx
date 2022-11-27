@@ -8,7 +8,6 @@ import { IFormPictures, IPictures } from 'Services/Utils/Interfaces';
 import { pictureValidator } from 'Services/Utils/Validators/picturesValidator';
 import styles from './FormPictures.module.css';
 import { v4 as uuidv4 } from 'uuid';
-import { isUserConnect } from 'Services/Utils/Constants';
 import { useDispatch } from 'react-redux';
 import { addPicture, editPicture } from 'Services/Redux/Features/picturesSlice';
 import ErrorMessage from 'Components/ErrorMessage/ErrorMessage';
@@ -44,12 +43,13 @@ export default function FormPictures({ isEdit, picture }: IFormPictures): JSX.El
     resolver: yupResolver(pictureValidator),
   });
   const onSubmit: SubmitHandler<IPictures> = async (formValues: IPictures): Promise<void> => {
-    if (!isUserConnect) return;
     try {
-      formValues.id = uuidv4();
-      formValues.authorID = isUserConnect;
       let response: AxiosResponse;
-      if (!isEdit) {
+      const currentUserID: string = localStorage.getItem('token')!;
+      if (!isEdit && currentUserID) {
+        console.log('picture authorID', currentUserID);
+        formValues.authorID = currentUserID;
+        formValues.id = uuidv4();
         response = await axios.post(URL + 'pictures', formValues);
         dispatch(addPicture(response.data));
       } else {

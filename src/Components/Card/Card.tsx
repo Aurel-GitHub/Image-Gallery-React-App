@@ -4,19 +4,7 @@ import 'Assets/Styles/Global/Button.css';
 import { useNavigate } from 'react-router-dom';
 
 export default function Card({ photo, artist, year, category, id, authorID }: IPictures) {
-  // const dispatch = useDispatch();
-
   const navigate = useNavigate();
-
-  const isCurrentUserCanEdit: boolean = authorID === localStorage.getItem('token');
-
-  //   const handleEdit = () => {
-  //     setEdit(false);
-
-  //     axios.put(URL + 'pictures' + id, ['TODO']).then(() => {
-  //       dispatch(editPicture(['FORM VALUES', 'ID PICTURE']));
-  //     });
-  //   };
 
   // const handleDelete = (id: string) => {
   //   try {
@@ -26,6 +14,11 @@ export default function Card({ photo, artist, year, category, id, authorID }: IP
   //     throw new error(error);
   //   }
   // };
+
+  const isUserCanUpdateCard = (): boolean => {
+    return localStorage.getItem('token') === authorID;
+  };
+
   return (
     <div className={styles.card}>
       <img src={photo} className={styles.photo} alt={'photo of' + artist} />
@@ -33,7 +26,7 @@ export default function Card({ photo, artist, year, category, id, authorID }: IP
         <div className={styles.description}>
           {artist} - {year} - {category}
         </div>
-        {isCurrentUserCanEdit && (
+        {isUserCanUpdateCard() && (
           <>
             <div className='btnDetails' onClick={() => navigate('/picture-detail/' + id)}>
               Edit
