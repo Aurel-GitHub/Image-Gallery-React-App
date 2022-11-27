@@ -31,13 +31,14 @@ export default function FormPictures({ isEdit, picture }: IFormPictures): JSX.El
     if (isEdit) {
       reset(picture);
     } else {
-      reset({ photo: 'https://picsum.photos/400/' + getRandomPictures });
+      setValue('photo', 'https://picsum.photos/400/' + getRandomPictures);
     }
   }, [picture]);
   const {
     reset,
     register,
     handleSubmit,
+    setValue,
     formState: { errors },
   } = useForm<IPictures>({
     resolver: yupResolver(pictureValidator),
