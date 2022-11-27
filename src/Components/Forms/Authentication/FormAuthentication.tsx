@@ -114,7 +114,7 @@ export default function FormAuthentication(): JSX.Element {
         />
         <ErrorMessage message={errors.password?.message} />
 
-        {errorMessage && <small className={styles.textDanger}>{errorMessage}</small>}
+        {errorMessage && <ErrorMessage message={errorMessage} />}
 
         <div className={styles.formBtnSection}>
           <button type='submit' className='btnSecondary'>

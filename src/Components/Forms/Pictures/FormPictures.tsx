@@ -9,7 +9,7 @@ import { pictureValidator } from 'Services/Utils/Validators/picturesValidator';
 import styles from './FormPictures.module.css';
 import { v4 as uuidv4 } from 'uuid';
 import { useDispatch } from 'react-redux';
-import { addPicture, editPicture } from 'Services/Redux/Features/picturesSlice';
+import { addPicture, deletePicture, editPicture } from 'Services/Redux/Features/picturesSlice';
 import ErrorMessage from 'Components/ErrorMessage/ErrorMessage';
 import 'Assets/Styles/Global/Inputs.css';
 
@@ -26,13 +26,6 @@ export default function FormPictures({ isEdit, picture }: IFormPictures): JSX.El
 
   const getRandomPictures: string = Math.floor(Math.random() * 300).toString();
 
-  useEffect(() => {
-    if (isEdit) {
-      reset(picture);
-    } else {
-      setValue('photo', 'https://picsum.photos/400/' + getRandomPictures);
-    }
-  }, [picture]);
   const {
     reset,
     register,
@@ -65,6 +58,24 @@ export default function FormPictures({ isEdit, picture }: IFormPictures): JSX.El
     }
   };
 
+  const handleDelete = async (pictureID: string): Promise<void> => {
+    try {
+      axios.delete(URL + 'pictures/' + pictureID);
+      dispatch(deletePicture(pictureID));
+      naviguate('/');
+    } catch (error: AxiosError | any) {
+      throw new error(error);
+    }
+  };
+
+  useEffect(() => {
+    if (isEdit) {
+      reset(picture);
+    } else {
+      setValue('photo', 'https://picsum.photos/400/' + getRandomPictures);
+    }
+  }, [picture]);
+
   return (
     <>
       <form className={styles.formPicture} onSubmit={handleSubmit(onSubmit)}>
@@ -92,6 +103,11 @@ export default function FormPictures({ isEdit, picture }: IFormPictures): JSX.El
           <button type='submit' className='btnSecondary'>
             {formLabels.label}
           </button>
+          {isEdit && picture && (
+            <button type='submit' className='btnAlert' onClick={() => handleDelete(picture.id)}>
+              Delete
+            </button>
+          )}
         </div>
       </form>
     </>

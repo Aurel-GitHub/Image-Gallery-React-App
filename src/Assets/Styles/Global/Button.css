@@ -46,6 +46,24 @@
   background-color: black;
   color: white;
 }
+
+.btnAlert {
+  background: red;
+  border: 1px white solid;
+  border-radius: 5px;
+  padding: 0.5rem 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  font-size: 14px;
+  color: white;
+  max-width: 7rem;
+}
+.btnbtnAlert:hover {
+  transition: 0.5s;
+  background-color: white;
+  color: red !important;
+  border: 1px red solid;
+}
 @media (max-width: 700px) {
   .btnPrimary {
     margin-bottom: 0.5rem;

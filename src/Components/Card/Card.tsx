@@ -6,15 +6,6 @@ import { useNavigate } from 'react-router-dom';
 export default function Card({ photo, artist, year, category, id, authorID }: IPictures) {
   const navigate = useNavigate();
 
-  // const handleDelete = (id: string) => {
-  //   try {
-  //     axios.delete(URL + 'pictures/' + id);
-  //     dispatch(deletePicture(id));
-  //   } catch (error: AxiosError | any) {
-  //     throw new error(error);
-  //   }
-  // };
-
   const isUserCanUpdateCard = (): boolean => {
     return localStorage.getItem('token') === authorID;
   };
@@ -31,9 +22,6 @@ export default function Card({ photo, artist, year, category, id, authorID }: IP
             <div className='btnDetails' onClick={() => navigate('/picture-detail/' + id)}>
               Edit
             </div>
-            {/* <div className='btnDetails' onClick={() => handleDelete(id)}>
-              Delete
-            </div> */}
           </>
         )}
       </div>
