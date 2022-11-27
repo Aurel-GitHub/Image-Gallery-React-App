@@ -119,9 +119,7 @@ export default function FormAuthentication(): JSX.Element {
         <ErrorMessage message={errorMessage} />
 
         <div className={styles.formBtnSection}>
-          <button type='submit' className='btnSecondary'>
-            {formLabels.title}
-          </button>
+          <button className='btnSecondary'>{formLabels.title}</button>
           <small className={styles.handleForm} onClick={handleForm}>
             {formLabels.sentence}
           </small>

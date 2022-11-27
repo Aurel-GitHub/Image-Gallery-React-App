@@ -42,7 +42,7 @@ export default function Home(): JSX.Element {
   return (
     <Container>
       <>
-        {!picturesData.length && (
+        {!picturesData.length && !isLoading && (
           <h1>
             <ErrorMessage message='Data not found' />
           </h1>
