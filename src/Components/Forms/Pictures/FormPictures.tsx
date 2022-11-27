@@ -47,7 +47,6 @@ export default function FormPictures({ isEdit, picture }: IFormPictures): JSX.El
       let response: AxiosResponse;
       const currentUserID: string = localStorage.getItem('token')!;
       if (!isEdit && currentUserID) {
-        console.log('picture authorID', currentUserID);
         formValues.authorID = currentUserID;
         formValues.id = uuidv4();
         response = await axios.post(URL + 'pictures', formValues);
