@@ -10,6 +10,7 @@ import { IPictures, IPicturesState } from 'Services/Utils/Interfaces';
 
 export default function Home(): JSX.Element {
   const dispatch = useDispatch();
+
   const [isLoading, setLoading] = useState<boolean>(false);
   const picturesData: IPictures[] = useSelector((state: IPicturesState) => state.pictures).pictures;
 

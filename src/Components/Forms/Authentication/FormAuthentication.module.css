@@ -21,6 +21,7 @@
   font-weight: 400;
   cursor: pointer;
 }
+
 @media (max-width: 1000px) {
   .handleForm {
     margin-top: 1rem;

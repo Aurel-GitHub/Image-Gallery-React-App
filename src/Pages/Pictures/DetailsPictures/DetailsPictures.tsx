@@ -9,7 +9,9 @@ import { IPictures, IPictureState } from 'Services/Utils/Interfaces';
 
 export default function DetailsPictures(): JSX.Element {
   const location = useLocation();
+
   const dispatch = useDispatch();
+
   const pictureData: IPictures = useSelector((state: IPictureState) => state.picture).picture;
 
   const getPicture = async (): Promise<void> => {
@@ -21,8 +23,10 @@ export default function DetailsPictures(): JSX.Element {
       throw new error(error);
     }
   };
+
   useEffect(() => {
     getPicture();
   }, []);
+
   return <FormPictures isEdit={true} picture={pictureData} />;
 }

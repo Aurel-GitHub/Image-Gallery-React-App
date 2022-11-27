@@ -4,7 +4,7 @@ import { useEffect, useState } from 'react';
 import { SubmitHandler, useForm } from 'react-hook-form';
 import { useNavigate } from 'react-router-dom';
 import URL from 'Services/Utils/Constants/url';
-import { IFormPictures, IPictures } from 'Services/Utils/Interfaces';
+import { IFormLabels, IFormPictures, IPictures } from 'Services/Utils/Interfaces';
 import { pictureValidator } from 'Services/Utils/Validators/picturesValidator';
 import styles from './FormPictures.module.css';
 import { v4 as uuidv4 } from 'uuid';
@@ -15,7 +15,7 @@ import 'Assets/Styles/Global/Inputs.css';
 
 export default function FormPictures({ isEdit, picture }: IFormPictures): JSX.Element {
   const [errorMessage, setErrorMessage] = useState<string>('');
-  const formLabels: { title: string; label: string } = {
+  const formLabels: IFormLabels = {
     title: !isEdit ? 'Create a new Picture' : 'Edit the picture details of ' + picture?.artist,
     label: !isEdit ? 'Create' : 'Edit',
   };
@@ -92,6 +92,7 @@ export default function FormPictures({ isEdit, picture }: IFormPictures): JSX.El
           <label>Picture</label>
           <input placeholder='Photo' type='text' className='inputForm' {...register('photo')} />
           <ErrorMessage message={errors.photo?.message} />
+
           <label>Catégory</label>
           <select id='categories-select' className='selectOptions' {...register('category')}>
             <option value='Artwork'>Artwork</option>
@@ -100,6 +101,7 @@ export default function FormPictures({ isEdit, picture }: IFormPictures): JSX.El
           </select>
 
           {errorMessage && <small className={styles.textDanger}>{errorMessage}</small>}
+
           <div>
             <button type='submit' className='btnSecondary'>
               {formLabels.label}

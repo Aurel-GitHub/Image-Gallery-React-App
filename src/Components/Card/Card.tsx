@@ -1,12 +1,12 @@
 import styles from './Card.module.css';
 import { IPictures } from 'Services/Utils/Interfaces';
-import 'Assets/Styles/Global/Button.css';
 import { useNavigate } from 'react-router-dom';
+import 'Assets/Styles/Global/Button.css';
 
 export default function Card({ photo, artist, year, category, id, authorID }: IPictures) {
   const navigate = useNavigate();
 
-  const isUserCanUpdateCard = (): boolean => {
+  const isUserCanUpdatePicture = (): boolean => {
     return localStorage.getItem('token') === authorID;
   };
 
@@ -17,7 +17,7 @@ export default function Card({ photo, artist, year, category, id, authorID }: IP
         <div className={styles.description}>
           {artist} - {year} - {category}
         </div>
-        {isUserCanUpdateCard() && (
+        {isUserCanUpdatePicture() && (
           <>
             <div className='btnDetails' onClick={() => navigate('/picture-detail/' + id)}>
               Edit

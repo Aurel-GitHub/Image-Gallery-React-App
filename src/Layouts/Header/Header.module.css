@@ -6,12 +6,14 @@
   background-color: #1a202c;
   flex-direction: row;
 }
+
 .logo {
   color: white;
   font-weight: 700;
   text-transform: uppercase;
   cursor: pointer;
 }
+
 .decorationNone {
   text-decoration: none;
 }

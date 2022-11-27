@@ -2,7 +2,6 @@ import styles from './FormAuthentication.module.css';
 import { useForm, SubmitHandler } from 'react-hook-form';
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { IUser } from 'Services/Utils/Interfaces/i-user';
 import { yupResolver } from '@hookform/resolvers/yup';
 import {
   signinValidator,
@@ -14,12 +13,15 @@ import { v4 as uuidv4 } from 'uuid';
 import URL from 'Services/Utils/Constants/url';
 import ErrorMessage from 'Components/ErrorMessage/ErrorMessage';
 import 'Assets/Styles/Global/Inputs.css';
+import { IFormLabels, IUser } from 'Services/Utils/Interfaces';
 
 export default function FormAuthentication(): JSX.Element {
   const [errorMessage, setErrorMessage] = useState<string>('');
   const [isCreateAccount, setIsCreateAccount] = useState<boolean>(false);
+
   const handleValidator = isCreateAccount ? signupValidator : signinValidator;
-  const formLabels: { title: string; sentence: string } = {
+
+  const formLabels: IFormLabels = {
     title: isCreateAccount ? 'Sign up' : 'Sign in',
     sentence: isCreateAccount ? 'Sign in ?' : 'Sign up ?',
   };
@@ -32,12 +34,21 @@ export default function FormAuthentication(): JSX.Element {
     reset();
   };
 
+  const {
+    reset,
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm<IUser>({
+    resolver: yupResolver(handleValidator),
+  });
+
   const hasAccessAuthentication = async (
     emailFormValue: string,
     passwordFormValue: string,
   ): Promise<boolean> => {
     try {
-      const response = await axios.get(URL + 'users');
+      const response: AxiosResponse = await axios.get(URL + 'users');
       const usersList: IUser[] = response.data;
 
       const isEmailExist: boolean = usersList?.some((elt) => elt.email === emailFormValue);
@@ -61,15 +72,6 @@ export default function FormAuthentication(): JSX.Element {
     }
   };
 
-  const {
-    reset,
-    register,
-    handleSubmit,
-    formState: { errors },
-  } = useForm<IUser>({
-    resolver: yupResolver(handleValidator),
-  });
-
   const onSubmit: SubmitHandler<IUser> = async (formValues: IUser): Promise<void> => {
     try {
       const loginAuthorization: boolean = await hasAccessAuthentication(
@@ -80,7 +82,7 @@ export default function FormAuthentication(): JSX.Element {
       let response: AxiosResponse;
       if (isCreateAccount) {
         formValues.id = uuidv4();
-        formValues.email.trim();
+        formValues.email.trim().toLocaleLowerCase();
         response = await axios.post(URL + 'users', formValues);
         localStorage.setItem('token', response.data.id);
         localStorage.setItem('firstname', response.data.email);
@@ -114,7 +116,7 @@ export default function FormAuthentication(): JSX.Element {
         />
         <ErrorMessage message={errors.password?.message} />
 
-        {errorMessage && <ErrorMessage message={errorMessage} />}
+        <ErrorMessage message={errorMessage} />
 
         <div className={styles.formBtnSection}>
           <button type='submit' className='btnSecondary'>

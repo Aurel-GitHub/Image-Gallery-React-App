@@ -4,6 +4,7 @@ import 'Assets/Styles/Global/Button.css';
 
 export default function Header(): JSX.Element {
   const navigate = useNavigate();
+
   const logout = async () => {
     localStorage.clear();
     navigate('/login');
