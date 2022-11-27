@@ -4,3 +4,4 @@ export * from './i-form-pictures';
 export * from './i-pictures-state';
 export * from './i-pictures';
 export * from './i-user';
+export * from './i-category-state';

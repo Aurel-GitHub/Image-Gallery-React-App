@@ -104,11 +104,9 @@ export default function FormPictures({ isEdit, picture }: IFormPictures): JSX.El
           {errorMessage && <small className={styles.textDanger}>{errorMessage}</small>}
 
           <div>
-            <button type='submit' className='btnSecondary'>
-              {formLabels.label}
-            </button>
+            <button className='btnSecondary'>{formLabels.label}</button>
             {isEdit && picture && (
-              <button type='submit' className='btnAlert' onClick={() => handleDelete(picture.id)}>
+              <button className='btnAlert' onClick={() => handleDelete(picture.id)}>
                 Delete
               </button>
             )}
