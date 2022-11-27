@@ -1,13 +1,14 @@
 import styles from './Card.module.css';
 import { IPictures } from 'Services/Utils/Interfaces';
 import 'Assets/Styles/Global/Button.css';
-import { isUserConnect } from 'Services/Utils/Constants';
 import { useNavigate } from 'react-router-dom';
 
 export default function Card({ photo, artist, year, category, id, authorID }: IPictures) {
   // const dispatch = useDispatch();
 
   const navigate = useNavigate();
+
+  const isCurrentUserCanEdit: boolean = authorID === localStorage.getItem('token');
 
   //   const handleEdit = () => {
   //     setEdit(false);
@@ -16,10 +17,6 @@ export default function Card({ photo, artist, year, category, id, authorID }: IP
   //       dispatch(editPicture(['FORM VALUES', 'ID PICTURE']));
   //     });
   //   };
-
-  const isCurrentUserAccess = () => {
-    if (isUserConnect) return authorID === localStorage.getItem('token');
-  };
 
   // const handleDelete = (id: string) => {
   //   try {
@@ -36,7 +33,7 @@ export default function Card({ photo, artist, year, category, id, authorID }: IP
         <div className={styles.description}>
           {artist} - {year} - {category}
         </div>
-        {isCurrentUserAccess() && (
+        {isCurrentUserCanEdit && (
           <>
             <div className='btnDetails' onClick={() => navigate('/picture-detail/' + id)}>
               Edit

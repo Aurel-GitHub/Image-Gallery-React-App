@@ -1,7 +1,7 @@
 import { IPictures } from 'Services/Utils/Interfaces';
 import { createSlice } from '@reduxjs/toolkit';
 
-const pictureSlice = createSlice({
+const picturesSlice = createSlice({
   name: 'pictures',
   initialState: {
     pictures: Array<IPictures>(),
@@ -31,5 +31,5 @@ const pictureSlice = createSlice({
   },
 });
 
-export default pictureSlice.reducer;
-export const { setPictures, addPicture, editPicture, deletePicture } = pictureSlice.actions;
+export default picturesSlice.reducer;
+export const { setPictures, addPicture, editPicture, deletePicture } = picturesSlice.actions;
