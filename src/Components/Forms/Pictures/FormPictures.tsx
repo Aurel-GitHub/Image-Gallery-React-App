@@ -1,6 +1,6 @@
 import { yupResolver } from '@hookform/resolvers/yup';
 import axios, { AxiosError, AxiosResponse } from 'axios';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { SubmitHandler, useForm } from 'react-hook-form';
 import { useNavigate } from 'react-router-dom';
 import URL from 'Services/Utils/Constants/url';
@@ -10,7 +10,7 @@ import styles from './FormPictures.module.css';
 import { v4 as uuidv4 } from 'uuid';
 import { isUserConnect } from 'Services/Utils/Constants';
 import { useDispatch } from 'react-redux';
-import { addPicture } from 'Services/Redux/Features/picturesSlice';
+import { addPicture, editPicture } from 'Services/Redux/Features/picturesSlice';
 import ErrorMessage from 'Components/ErrorMessage/ErrorMessage';
 import 'Assets/Styles/Global/Inputs.css';
 
@@ -25,25 +25,23 @@ export default function FormPictures({ isEdit, picture }: IFormPictures): JSX.El
 
   const naviguate = useNavigate();
 
-  // const getRandomPictures: string = Math.floor(Math.random() * 300).toString();
+  const getRandomPictures: string = Math.floor(Math.random() * 300).toString();
 
+  useEffect(() => {
+    if (isEdit) {
+      reset(picture);
+    } else {
+      reset({ photo: 'https://picsum.photos/400/' + getRandomPictures });
+    }
+  }, [picture]);
   const {
     reset,
     register,
     handleSubmit,
     formState: { errors },
   } = useForm<IPictures>({
-    defaultValues: {
-      id: isEdit ? picture?.id : '',
-      artist: isEdit ? picture?.artist : '',
-      authorID: isEdit ? picture?.authorID : '',
-      category: isEdit ? picture?.category : '',
-      photo: isEdit ? picture?.photo : '',
-      year: isEdit ? picture?.year : '',
-    },
     resolver: yupResolver(pictureValidator),
   });
-
   const onSubmit: SubmitHandler<IPictures> = async (formValues: IPictures): Promise<void> => {
     if (!isUserConnect) return;
     try {
@@ -52,12 +50,12 @@ export default function FormPictures({ isEdit, picture }: IFormPictures): JSX.El
       let response: AxiosResponse;
       if (!isEdit) {
         response = await axios.post(URL + 'pictures', formValues);
+        dispatch(addPicture(response.data));
       } else {
         const id: string = location.pathname.slice(16);
-        response = await axios.put(URL + 'pictures' + id, formValues);
-        console.log('id', id, 'res', response);
+        response = await axios.put(URL + 'pictures/' + id, formValues);
+        dispatch(editPicture(response.data));
       }
-      dispatch(addPicture(response.data));
       naviguate('/');
     } catch (error: AxiosError | any) {
       setErrorMessage('Try again later please');
